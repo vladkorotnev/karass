@@ -30,7 +30,7 @@ function sylTimingSpacePress(isPress) {
         sylTimerSylLine.childNodes[currToken].classList.add("current");
     } else {
         lineObj.tokens[currToken].end = player.currentTime;
-        sylTimerCursorLine.childNodes[currToken].innerHTML = " ";
+        sylTimerCursorLine.childNodes[currToken].innerHTML = "&nbsp;";
         sylTimerSylLine.childNodes[currToken].classList.remove("current");
         sylTimerSylLine.childNodes[currToken].classList.add("past");
         currToken++;
@@ -64,7 +64,7 @@ function sylTimingOnKeyDown(e) {
             sylTimingSpacePress(true);
         break;
 
-        case ';':
+        case '/':
             sylTimingJumpBackLine();
         break;
     }
@@ -111,5 +111,12 @@ function sylTimingOnTick(e) {
         currLine = curPlayLine;
         currToken = 0;
         sylTimingDrawLine();
+    }
+
+    let nxtLineIdx = lines.findIndex(x => x.start > time && x.end > time);
+    if(nxtLineIdx == -1) {
+        sylNextTimer.innerText = "--:--:--.---";
+    } else {
+        sylNextTimer.innerHTML = assFmtTimeMs((lines[nxtLineIdx].start - time) * 1000) + "(" + lines[nxtLineIdx].preview + ")";
     }
 }

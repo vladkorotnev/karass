@@ -44,6 +44,14 @@ function commonKeyPress(e) {
         case '[':
             slower();
         break;
+        
+        case ';':
+            player.currentTime -= 3.0;
+        break;
+
+        case '\'':
+            player.currentTime += 3.0;
+        break;
     }
 
     e.preventDefault = true;

@@ -42,8 +42,10 @@
                 <ul>
                     <li>Space - Next line</li>
                     <li>. - End current line, don't show next line yet</li>
+                    <li>/ - Nudge current line start to current time</li>
                     <li>p - Play/pause</li>
                     <li>[, ] - adjust playback speed</li>
+                    <li>;, ' - jump 3s back/forward</li>
                 </ul>
             </p>
             <span id="curLinePreview">...</span>
@@ -70,9 +72,11 @@
                     <li>Space - Hold during syllable, release otherwise</li>
                     <li>p - Play/pause</li>
                     <li>[, ] - adjust playback speed</li>
+                    <li>;, ' - jump 3s back/forward</li>
                     <li>; - redo previous line</li>
                 </ul>
             </p>
+            <strong>Next line arrives in: </strong><span id="sylNextTimer">--:--:--.---</span>
             <table id="sylTimerView">
                 <thead>
                     <tr id="sylTimerCursorLine"></tr>

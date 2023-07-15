@@ -8,11 +8,11 @@ function mkLineRow(lineObj) {
     e.appendChild(cursor);
 
     let start = document.createElement('td');
-    start.innerText = lineObj.start;
+    start.innerText = "???";
     e.appendChild(start);
 
     let end = document.createElement('td');
-    end.innerText = lineObj.end;
+    end.innerText = "???";
     e.appendChild(end);
 
     let preview = document.createElement('td');
@@ -23,8 +23,8 @@ function mkLineRow(lineObj) {
 }
 
 function updateLineRow(lineObj, lineRow, isCurrent) {
-    lineRow.childNodes[1].innerText = lineObj.start;
-    lineRow.childNodes[2].innerText = lineObj.end;
+    lineRow.childNodes[1].innerText = assFmtTimeMs(lineObj.start*1000);
+    lineRow.childNodes[2].innerText = assFmtTimeMs(lineObj.end*1000);
 
     if(!isCurrent) {
         lineRow.childNodes[0].innerHTML = ".";
@@ -32,6 +32,10 @@ function updateLineRow(lineObj, lineRow, isCurrent) {
     } else {
         lineRow.childNodes[0].innerHTML = ">";
         lineRow.classList.add('current');
+        lineRow.scrollIntoView({
+            behavior: "instant",
+            block: "center"
+        });
     }
 }
 
@@ -69,6 +73,13 @@ function awaitLineStart() {
     }
 }
 
+function nudgeLineStart() {
+    if(player.paused || currLine < 0 || isAwaitNextLine) return;
+
+    lines[currLine].start = player.currentTime;
+    updateLineRow(lines[currLine], lineTimerContent.childNodes[currLine], true);
+}
+
 function lineTimingOnKeyPress(e) {
     if(e.isComposing || e.keyCode == 229) return; // https://developer.mozilla.org/en-US/docs/Web/API/Element/keydown_event
 
@@ -79,6 +90,10 @@ function lineTimingOnKeyPress(e) {
 
         case '.':
             awaitLineStart();
+        break;
+
+        case '/':
+            nudgeLineStart();
         break;
     }
 

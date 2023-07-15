@@ -1,3 +1,8 @@
+html, body {
+    max-height: 100%;
+    overflow-y: hidden;
+}
+
 .step {
     width: 100%;
     display: none;
@@ -19,6 +24,9 @@
     width: 90%;
 }
 
+#sylNextTimer {
+    font-family: monospace;
+}
 
 #playerSpeed {
     right: 0;
@@ -49,7 +57,7 @@
 
 #lineTimerView {
     display: block;
-    height: 50%;
+    height: 44%;
     overflow-y: scroll;
 }
 
