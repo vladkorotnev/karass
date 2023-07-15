@@ -1,0 +1,85 @@
+<html>
+    <head>
+        <title>KarAss</title>
+        <link rel="stylesheet" type="text/css" href="css/common.css" />
+        <script type="text/javascript" src="js/common.js"></script>
+        <script type="text/javascript" src="js/wizard.js"></script>
+        <script type="text/javascript" src="js/text.js"></script>
+        <script type="text/javascript" src="js/lineTiming.js"></script>
+        <script type="text/javascript" src="js/sylTiming.js"></script>
+        <script type="text/javascript" src="js/ass.js"></script>
+    </head>
+    <body onload="init()">
+        <center><h1>KarAss</h1><span>karaoke to ASS tool</span><hr/></center>
+        <div id="playerHolder" style="display: none;" >
+            <audio id="player" controls="true" onfocus="player.blur()"></audio>
+            <div id="playerSpeed">
+                <a href="#" onclick="slower()">[</a>
+                <span id="playerSpeedDisplay">1.0</span>
+                <a href="#" onclick="faster()">]</a>
+            </div>
+        </div>
+        <div id="step1" class="step">
+            <h1>Step 1: Loading Data</h1>
+            <strong>Select an audio file: </strong> <input type="file" accept="audio/*" id="audioSelect"/><br/>
+            <strong>Input lyrics line by line (furigana OK):</strong><br/>
+            <textarea id="lyricInput" cols="80" rows="30" onchange="lyricAutoSave()"></textarea>
+            <br/>
+            <em>examples:<br/>夏|な#|つの草|く#|さ原|は#|らに<br/>na tsu no ku sa ha ra ni</em><br/>
+            <strong>and click <input type="button" value="Next >>" id="btnGoStep2" onclick="goStep2()"></strong>
+        </div>
+        <div id="step2" class="step">
+            <h1>Step 2: Line Timing</h1>
+            <strong>Start playing the song and use hotkeys to time audio.</strong>
+            <p>
+                Hotkeys:<br/>
+                <ul>
+                    <li>Space - Next line</li>
+                    <li>. - End current line, don't show next line yet</li>
+                    <li>p - Play/pause</li>
+                    <li>[, ] - adjust playback speed</li>
+                </ul>
+            </p>
+            <span id="curLinePreview">...</span>
+            <table id="lineTimerView">
+                <thead>
+                    <tr>
+                        <td></td>
+                        <td>Start</td>
+                        <td>End</td>
+                        <td>Text</td>
+                    </tr>
+                </thead>
+                <tbody id="lineTimerContent"></tbody>
+            </table>
+            <strong>When done click <input type="button" value="Next >>" id="btnGoStep3" onclick="goStep3()" onfocus="btnGoStep3.blur()"></strong><br/>
+            <em>... or download the <a href="#" onclick="downloadStep2()">line-only ASS</a>.</em>
+        </div>
+        <div id="step3" class="step">
+            <h1>Step 3: Syllable Timing</h1>
+            <strong>Start playing the song and use hotkeys to time audio.</strong>
+            <p>
+                Hotkeys:<br/>
+                <ul>
+                    <li>Space - Hold during syllable, release otherwise</li>
+                    <li>p - Play/pause</li>
+                    <li>[, ] - adjust playback speed</li>
+                    <li>; - redo previous line</li>
+                </ul>
+            </p>
+            <table id="sylTimerView">
+                <thead>
+                    <tr id="sylTimerCursorLine"></tr>
+                </thead>
+                <tbody>
+                    <tr id="sylTimerSylLine"></tr>
+                </tbody>
+            </table>
+            <strong>When done click <input type="button" value="Download" id="btnFinish" onclick="downloadStep3()" onfocus="btnFinish.blur()"></strong><br/>
+        </div>
+        <footer>
+            <hr/>
+            <em>This Super Shit Code Certified Quasi WebApp &copy; DJ Akasaka 2023 (Web Apps Suck But They're Too Easy For Prototyping)</em>
+        </footer>
+    </body>
+</html>

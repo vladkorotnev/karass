@@ -1,0 +1,71 @@
+.step {
+    width: 100%;
+    display: none;
+}
+
+.step.active {
+    display: block;
+}
+
+#playerHolder, #lineTimerView {
+    width: 100%;
+}
+
+#playerHolder {
+    display: block;
+}
+
+#player {
+    width: 90%;
+}
+
+
+#playerSpeed {
+    right: 0;
+    display: inline-block;
+    position: absolute;
+    vertical-align: middle;
+    height: 100%;
+    font-size: xx-large;
+}
+
+#lineTimerView > thead {
+    font-weight: bold;
+    text-align: center;
+}
+
+#lineTimerContent > tr > th {
+    font-weight: bolder;
+    font-size: large;
+}
+
+#lineTimerContent > .current, #sylTimerCursorLine > .current, #sylTimerSylLine > .current {
+    background-color: orange;
+}
+
+#sylTimerCursorLine > .past, #sylTimerSylLine > .past {
+    color: gray;
+}
+
+#lineTimerView {
+    display: block;
+    height: 50%;
+    overflow-y: scroll;
+}
+
+#curLinePreview {
+    width: 100%;
+    text-align: center;
+    font-weight: bold;
+    font-size: xx-large;
+    font-family: sans-serif;
+    display: block;
+}
+
+#sylTimerView {
+    text-align: center;
+    width: 100%;
+    font-size: xx-large;
+    font-family: sans-serif;
+    min-height: 90px;
+}
