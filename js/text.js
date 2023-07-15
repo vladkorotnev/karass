@@ -42,7 +42,8 @@ function parseLines() {
                             start: 0,
                             end: 0,
                             text: x,
-                            preview: x.replaceAll(/.\|(.)|(.)/g, "$1$2").replaceAll('#','')
+                            preview: x.replaceAll(/.\|(.)|(.)/g, "$1$2").replaceAll('#',''),
+                            isFuriSeqContinuation: x.startsWith('#|')
                         })),
             start: 0,
             end: 0,

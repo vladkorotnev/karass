@@ -6,12 +6,19 @@ function sylTimingMergeTokens() {
         var newTxt = "";
         var lastEnd = lineObj.start;
         for(let tokenObj of lineObj.tokens) {
+            var extraTime = 0;
             if(tokenObj.start > lastEnd) {
-                // Need to add delay until next token
-                newTxt += "{\\kf" + Math.round((tokenObj.start - lastEnd) * 100) + "}"; 
+                if(!tokenObj.isFuriSeqContinuation) {
+                    // Need to add delay until next token
+                    newTxt += "{\\kf" + Math.round((tokenObj.start - lastEnd) * 100) + "}"; 
+                } else {
+                    // This token is a continuation of Furigana sequence
+                    // So we need to instead extend it's time
+                    extraTime += (tokenObj.start - lastEnd);
+                }
             }
             lastEnd = tokenObj.end;
-            newTxt += "{\\kf" + Math.round((tokenObj.end - tokenObj.start) * 100) + "}" + tokenObj.text;
+            newTxt += "{\\kf" + Math.round(((tokenObj.end - tokenObj.start) + extraTime) * 100) + "}" + tokenObj.text;
         }
         lineObj.raw = newTxt;
     }
