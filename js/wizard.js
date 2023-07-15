@@ -1,5 +1,6 @@
 function init() {
     step1.classList.add("active");
+    lyricInput.addEventListener('keydown', textKeyDown);
     if(window.localStorage.lyric) {
         lyricInput.value = window.localStorage.lyric;
     }
@@ -44,7 +45,7 @@ function downloadStep2() {
 
 function goStep3() {
     player.pause();
-    player.currentTime = 0.0;
+    player.currentTime = lines[0].start - 3.0;
     currLine = -1;
 
     document.removeEventListener('keydown', lineTimingOnKeyPress);

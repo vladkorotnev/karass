@@ -53,6 +53,7 @@ function sylTimingJumpBackLine() {
         currLine -= 1;
     }
     player.currentTime = lines[currLine].start;
+    sylTimingDrawLine();
 }
 
 function sylTimingOnKeyDown(e) {
